@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 
 const categories = [
-  { name: "Beans", emoji: "🫘" },
-  { name: "Berries", emoji: "🍓" },
-  { name: "Citrus", emoji: "🍊" },
+  { name: "Vegetables", emoji: "🥬" },
   { name: "Fruits", emoji: "🍎" },
-  { name: "Juices", emoji: "🧃" },
-  { name: "Lettuce", emoji: "🥬" },
-  { name: "Meats", emoji: "🥩" },
-  { name: "Salads", emoji: "🥗" },
   { name: "Dairy", emoji: "🥛" },
+  { name: "Staples", emoji: "🌾" },
+  { name: "Snacks", emoji: "🍿" },
+  { name: "Beverages", emoji: "🧃" },
+  { name: "Personal Care", emoji: "🪥" },
+  { name: "Bath & Soap", emoji: "🧼" },
+  { name: "Household", emoji: "🧴" },
   { name: "Apparel", emoji: "👕" },
 ];
 
