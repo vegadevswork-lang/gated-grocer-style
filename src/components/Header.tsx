@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { MapPin, Search, ChevronDown, ShoppingCart, User, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useSearch } from "@/context/SearchContext";
+import { allProducts } from "@/data/products";
+import { useProductDetail } from "@/context/ProductDetailContext";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
