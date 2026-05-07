@@ -10,6 +10,16 @@ import winterJacket from "@/assets/clothing/winter-jacket.jpg";
 import cottonShorts from "@/assets/clothing/cotton-shorts.jpg";
 import slimJeans from "@/assets/clothing/slim-jeans.jpg";
 import graphicTshirt from "@/assets/clothing/graphic-tshirt.jpg";
+import slimFitShirt from "@/assets/clothing/slim-fit-shirt.jpg";
+import cottonRoundTee from "@/assets/clothing/cotton-round-tee.jpg";
+import maggiImg from "@/assets/instant/maggi.jpg";
+import waiWaiImg from "@/assets/instant/wai-wai.jpg";
+import topRamenImg from "@/assets/instant/top-ramen.jpg";
+import knorrSoupImg from "@/assets/instant/knorr-soup.jpg";
+import mtrDosaImg from "@/assets/instant/mtr-dosa.jpg";
+import bournvilleImg from "@/assets/chocolates/bournville.jpg";
+import silkGanacheImg from "@/assets/chocolates/silk-ganache.jpg";
+import munchMaxImg from "@/assets/chocolates/munch-max.jpg";
 
 type Product = {
   name: string;
@@ -108,25 +118,27 @@ const sections: Section[] = [
       { name: "Cadbury Dairy Milk Silk Hazelnut", price: 204, oldPrice: 214, rating: 4.8, pack: "134 g", tag: "Hazelnut", query: "dairy milk silk hazelnut" },
       { name: "Nestle KitKat 4 Fingers", price: 30, oldPrice: 35, rating: 4.7, pack: "38.5 g", tag: "Wafer", query: "kitkat chocolate bar" },
       { name: "Amul Dark Chocolate Bar", price: 45, oldPrice: 55, rating: 4.7, pack: "35 g", tag: "Dark", query: "dark chocolate bar" },
-      { name: "Nestle Munch Max Crunchy Wafer", price: 20, oldPrice: 25, rating: 4.6, pack: "38.5 g", tag: "Crunchy", query: "munch chocolate wafer" },
-      { name: "Cadbury Dairy Milk Silk Ganache", price: 204, oldPrice: 214, rating: 4.8, pack: "137 g", tag: "Ganache", query: "dairy milk silk chocolate" },
-      { name: "Cadbury Bournville 70% Dark", price: 125, oldPrice: 145, rating: 4.8, pack: "80 g", tag: "Premium", query: "bournville dark chocolate" },
+      { name: "Nestle Munch Max Crunchy Wafer", price: 20, oldPrice: 25, rating: 4.6, pack: "38.5 g", tag: "Crunchy", query: "munch chocolate wafer", img: munchMaxImg },
+      { name: "Cadbury Dairy Milk Silk Ganache", price: 204, oldPrice: 214, rating: 4.8, pack: "137 g", tag: "Ganache", query: "dairy milk silk chocolate", img: silkGanacheImg },
+      { name: "Cadbury Bournville 70% Dark", price: 125, oldPrice: 145, rating: 4.8, pack: "80 g", tag: "Premium", query: "bournville dark chocolate", img: bournvilleImg },
     ],
   },
   {
     title: "Instant Foods",
     products: [
-      { name: "Maggi 2-Min Noodles", price: 14, oldPrice: 15, rating: 4.8, pack: "70 g", tag: "Masala", query: "maggi noodles" },
+      { name: "Maggi 2-Min Noodles", price: 14, oldPrice: 15, rating: 4.8, pack: "70 g", tag: "Masala", query: "maggi noodles", img: maggiImg },
       { name: "Yippee Noodles", price: 14, oldPrice: 15, rating: 4.6, pack: "70 g", tag: "Magic", query: "instant noodles" },
-      { name: "MTR Ready Mix", price: 75, oldPrice: 90, rating: 4.6, pack: "200 g", tag: "Breakfast", query: "ready meal mix" },
-      { name: "Knorr Soup Cup", price: 35, oldPrice: 40, rating: 4.5, pack: "70 g", tag: "Veg", query: "soup cup" },
-      { name: "Top Ramen Curry", price: 18, oldPrice: 20, rating: 4.5, pack: "75 g", tag: "Curry", query: "ramen noodles" },
-      { name: "Wai Wai Noodles", price: 20, oldPrice: 25, rating: 4.6, pack: "75 g", tag: "Crunchy", query: "wai wai noodles" },
+      { name: "MTR Ready Mix", price: 75, oldPrice: 90, rating: 4.6, pack: "200 g", tag: "Breakfast", query: "ready meal mix", img: mtrDosaImg },
+      { name: "Knorr Soup Cup", price: 35, oldPrice: 40, rating: 4.5, pack: "70 g", tag: "Veg", query: "soup cup", img: knorrSoupImg },
+      { name: "Top Ramen Curry", price: 18, oldPrice: 20, rating: 4.5, pack: "75 g", tag: "Curry", query: "ramen noodles", img: topRamenImg },
+      { name: "Wai Wai Noodles", price: 20, oldPrice: 25, rating: 4.6, pack: "75 g", tag: "Crunchy", query: "wai wai noodles", img: waiWaiImg },
     ],
   },
   {
     title: "Clothing",
     products: [
+      { name: "Cotton Round Tee", price: 499, oldPrice: 699, rating: 4.7, pack: "1 pc", tag: "Cotton", query: "cotton tshirt", img: cottonRoundTee },
+      { name: "Slim Fit Shirt", price: 799, oldPrice: 1099, rating: 4.6, pack: "1 pc", tag: "Formal", query: "formal shirt", img: slimFitShirt },
       { name: "Graphic T-Shirt", price: 449, oldPrice: 599, rating: 4.5, pack: "1 pc", tag: "Casual", query: "graphic tshirt", img: graphicTshirt },
       { name: "Casual Shirt", price: 649, oldPrice: 899, rating: 4.6, pack: "1 pc", tag: "Stylish", query: "casual shirt men", img: casualShirt },
       { name: "Slim Denim Jeans", price: 999, oldPrice: 1499, rating: 4.7, pack: "1 pc", tag: "Stretch", query: "blue jeans", img: slimJeans },
