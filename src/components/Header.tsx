@@ -6,13 +6,13 @@ const leftItems = [
   "🥬 Spinach",
   "🥕 Carrots",
   "🍅 Tomatoes",
-  "🥔 Potatoes",
-  "🧅 Onions",
-  "🥦 Broccoli",
-  "🌶️ Chillies",
-  "🍆 Brinjal",
-  "🥒 Cucumber",
-  "🫑 Capsicum",
+  "🌾 Rice",
+  "🥛 Milk",
+  "🪥 Toothpaste",
+  "🧼 Soap",
+  "🧴 Shampoo",
+  "🧻 Tissues",
+  "🧽 Cleaners",
 ];
 
 const rightItems = [
