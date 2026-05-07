@@ -20,8 +20,15 @@ export function CartDrawer() {
       "",
       `Subtotal: ₹${subtotal}`,
     ].join("\n");
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-    window.open(url, "_blank");
+    const text = encodeURIComponent(msg);
+    // Use wa.me (works on web + mobile). Fallback to whatsapp:// app scheme if blocked.
+    const waMe = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+    const appScheme = `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${text}`;
+    const win = window.open(waMe, "_blank");
+    if (!win) {
+      // popup blocked → try app scheme directly
+      window.location.href = appScheme;
+    }
   };
 
   return (
