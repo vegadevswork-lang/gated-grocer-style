@@ -18,11 +18,10 @@ export function ProductDetailDialog() {
   const total = product.price * qty;
 
   const handleAdd = () => {
-    add({ id: product.id, name: product.name, price: product.price, img: product.img });
-    // adjust qty to chosen value
     const existing = items.find((i) => i.id === product.id);
-    const baseQty = (existing?.qty ?? 0) + 1;
-    if (qty !== 1) setQty(product.id, baseQty - 1 + qty);
+    add({ id: product.id, name: product.name, price: product.price, img: product.img });
+    const baseQty = existing?.qty ?? 0;
+    if (qty > 1) setQty(product.id, baseQty + qty);
     close();
   };
 
