@@ -1,56 +1,111 @@
 import { motion } from "framer-motion";
-import { Plus, Star } from "lucide-react";
+import { Star } from "lucide-react";
+import grapes from "@/assets/p-grapes.jpg";
+import corn from "@/assets/p-corn.jpg";
+import tomatoes from "@/assets/p-tomatoes.jpg";
+import cabbage from "@/assets/p-cabbage.jpg";
+import tshirt from "@/assets/p-tshirt.jpg";
 
 type Product = {
   name: string;
-  price: number;
-  unit: string;
+  price: string;
+  oldPrice?: string;
   rating: number;
-  emoji: string;
-  tag?: string;
+  img: string;
+  badges?: { label: string; tone: "hot" | "off" | "new" }[];
 };
 
-const groceries: Product[] = [
-  { name: "Organic Spinach", price: 35, unit: "250g", rating: 4.6, emoji: "🥬", tag: "Fresh" },
-  { name: "Farm Tomatoes", price: 28, unit: "500g", rating: 4.4, emoji: "🍅" },
-  { name: "Alphonso Mangoes", price: 299, unit: "1kg", rating: 4.9, emoji: "🥭", tag: "Seasonal" },
-  { name: "Whole Wheat Atta", price: 240, unit: "5kg", rating: 4.7, emoji: "🌾" },
-  { name: "Farm Fresh Eggs", price: 90, unit: "12pcs", rating: 4.8, emoji: "🥚" },
-  { name: "Toned Milk", price: 56, unit: "1L", rating: 4.5, emoji: "🥛" },
+const products: Product[] = [
+  {
+    name: "Fresh Red Seedless",
+    price: "₹60.00 – ₹120.00",
+    rating: 5,
+    img: grapes,
+    badges: [{ label: "Hot", tone: "hot" }, { label: "-20%", tone: "off" }],
+  },
+  {
+    name: "Organic Sweet Corn",
+    price: "₹16.00",
+    oldPrice: "₹19.00",
+    rating: 4,
+    img: corn,
+    badges: [{ label: "-15%", tone: "off" }],
+  },
+  {
+    name: "Organic Grape Tomatoes",
+    price: "₹79.00",
+    rating: 5,
+    img: tomatoes,
+    badges: [{ label: "Hot", tone: "hot" }],
+  },
+  {
+    name: "Organic Green Cabbage",
+    price: "₹45.00 – ₹65.00",
+    rating: 4,
+    img: cabbage,
+    badges: [{ label: "-10%", tone: "off" }],
+  },
+  {
+    name: "Cotton Round Tee",
+    price: "₹499.00",
+    oldPrice: "₹699.00",
+    rating: 5,
+    img: tshirt,
+    badges: [{ label: "New", tone: "new" }],
+  },
 ];
 
-const clothes: Product[] = [
-  { name: "Cotton Round Tee", price: 499, unit: "Unisex", rating: 4.5, emoji: "👕", tag: "New" },
-  { name: "Floral Summer Dress", price: 1299, unit: "Women", rating: 4.7, emoji: "👗" },
-  { name: "Slim Fit Jeans", price: 1599, unit: "Men", rating: 4.6, emoji: "👖" },
-  { name: "Silk Saree", price: 2499, unit: "Women", rating: 4.9, emoji: "🥻", tag: "Premium" },
-];
+const toneClass: Record<string, string> = {
+  hot: "bg-destructive text-destructive-foreground",
+  off: "bg-primary text-primary-foreground",
+  new: "bg-accent-foreground text-accent",
+};
 
-function Card({ product }: { product: Product }) {
+function Card({ product, i }: { product: Product; i: number }) {
   return (
     <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: i * 0.08 }}
       whileHover={{ y: -6 }}
-      className="group bg-card rounded-2xl border border-border overflow-hidden shadow-sm hover:shadow-elegant transition-all"
+      className="bg-card rounded-2xl border border-border overflow-hidden group"
     >
-      <div className="relative aspect-square bg-gradient-to-br from-secondary to-accent/40 flex items-center justify-center text-7xl">
-        {product.emoji}
-        {product.tag && (
-          <span className="absolute top-3 left-3 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full">
-            {product.tag}
-          </span>
-        )}
-      </div>
-      <div className="p-4">
-        <div className="flex items-center gap-1 text-xs text-muted-foreground mb-1">
-          <Star className="w-3 h-3 fill-primary text-primary" /> {product.rating}
-          <span className="ml-auto">{product.unit}</span>
+      <div className="relative aspect-square bg-white flex items-center justify-center overflow-hidden">
+        <img
+          src={product.img}
+          alt={product.name}
+          loading="lazy"
+          className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute top-3 left-3 right-3 flex items-start justify-between">
+          <div className="flex flex-col gap-1">
+            {product.badges?.map((b) => (
+              <span
+                key={b.label}
+                className={`${toneClass[b.tone]} text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded`}
+              >
+                {b.label}
+              </span>
+            ))}
+          </div>
         </div>
+      </div>
+      <div className="p-4 text-center border-t border-border">
         <h3 className="font-semibold text-foreground line-clamp-1">{product.name}</h3>
-        <div className="mt-2 flex items-center justify-between">
-          <span className="text-lg font-bold text-foreground">₹{product.price}</span>
-          <button className="p-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition" aria-label="Add to cart">
-            <Plus className="w-4 h-4" />
-          </button>
+        <div className="mt-1 flex items-center justify-center gap-0.5">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star
+              key={i}
+              className={`w-3.5 h-3.5 ${i < product.rating ? "fill-primary text-primary" : "text-muted-foreground/30"}`}
+            />
+          ))}
+        </div>
+        <div className="mt-2 flex items-center justify-center gap-2">
+          {product.oldPrice && (
+            <span className="text-sm text-muted-foreground line-through">{product.oldPrice}</span>
+          )}
+          <span className="text-base font-bold text-primary">{product.price}</span>
         </div>
       </div>
     </motion.div>
@@ -59,31 +114,21 @@ function Card({ product }: { product: Product }) {
 
 export function ProductGrid() {
   return (
-    <section className="max-w-7xl mx-auto px-4 py-16 space-y-16">
-      <div>
-        <div className="flex items-end justify-between mb-6">
-          <div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold">Today's Groceries</h2>
-            <p className="text-muted-foreground mt-1">Hand-picked from local farms this morning.</p>
-          </div>
-          <a href="#" className="story-link text-primary font-semibold text-sm">View all</a>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {groceries.map((p) => <Card key={p.name} product={p} />)}
-        </div>
+    <section className="max-w-7xl mx-auto px-4 py-16">
+      <div className="text-center mb-10">
+        <h2 className="font-display text-4xl font-extrabold text-foreground inline-block relative">
+          Best Seller
+          <span className="block w-24 h-1 bg-primary mx-auto mt-3 rounded-full" />
+        </h2>
+        <p className="text-muted-foreground mt-3 text-sm uppercase tracking-widest">
+          So you get to know us better
+        </p>
       </div>
 
-      <div>
-        <div className="flex items-end justify-between mb-6">
-          <div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold">Ready-to-Wear</h2>
-            <p className="text-muted-foreground mt-1">Trendy styles, delivered with your veggies.</p>
-          </div>
-          <a href="#" className="story-link text-primary font-semibold text-sm">View all</a>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {clothes.map((p) => <Card key={p.name} product={p} />)}
-        </div>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+        {products.map((p, i) => (
+          <Card key={p.name} product={p} i={i} />
+        ))}
       </div>
     </section>
   );
