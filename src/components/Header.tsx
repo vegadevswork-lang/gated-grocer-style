@@ -33,7 +33,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
-        <Link to="/" className="shrink-0 select-none">
+        <Link to="/" className="shrink-0 select-none flex items-center gap-3 pr-4 mr-2 border-r border-border">
           <div
             style={{
               backgroundImage:
@@ -43,10 +43,12 @@ export function Header() {
               backgroundClip: "text",
               color: "transparent",
               animation: "amarShift 6s linear infinite",
+              textShadow: "0 1px 2px rgba(0,0,0,0.05)",
+              letterSpacing: "0.02em",
             }}
-            className="font-display text-xl md:text-2xl font-extrabold tracking-tight"
+            className="font-display text-2xl md:text-3xl font-black tracking-tight drop-shadow-sm"
           >
-            AMAR SUPERMARKET
+            AMAR<span className="mx-1">·</span>SUPERMARKET
           </div>
         </Link>
 
