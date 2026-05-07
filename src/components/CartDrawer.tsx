@@ -5,7 +5,6 @@ import { Minus, Plus, Trash2, ShoppingBag, Copy, Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 const WHATSAPP_LINK = "https://wa.link/98958w";
-const WHATSAPP_DISPLAY = "+91 93987 87108";
 
 export function CartDrawer() {
   const { items, isOpen, setOpen, setQty, remove, subtotal, clear } = useCart();
@@ -128,7 +127,7 @@ export function CartDrawer() {
                 className="w-full text-xs text-muted-foreground hover:text-foreground flex items-center justify-center gap-1.5"
               >
                 {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                {copied ? "Copied!" : `If WhatsApp doesn't open, copy order & message ${WHATSAPP_DISPLAY}`}
+                {copied ? "Copied!" : "Copy order details"}
               </button>
               <button
                 onClick={clear}
