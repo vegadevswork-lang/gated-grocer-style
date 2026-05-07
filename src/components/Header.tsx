@@ -169,6 +169,73 @@ export function Header() {
               </div>
             </div>
           )}
+
+          {showDropdown && (
+            <div className="absolute left-0 right-0 top-12 bg-card border border-border rounded-lg shadow-elegant max-h-96 overflow-y-auto z-50">
+              {results.length === 0 ? (
+                <div className="px-4 py-6 text-sm text-muted-foreground text-center">
+                  No products match "<span className="font-semibold text-foreground">{query}</span>"
+                </div>
+              ) : (
+                <ul className="py-1">
+                  {results.map((p) => (
+                    <li key={p.name}>
+                      <button
+                        onClick={() => {
+                          openProduct({
+                            id: p.name,
+                            name: p.name,
+                            price: p.price,
+                            oldPrice: p.oldPrice,
+                            pack: p.pack,
+                            tag: p.tag,
+                            rating: p.rating,
+                            img: p.imgSrc,
+                            inStock: 24,
+                          });
+                          setFocused(false);
+                        }}
+                        className="w-full flex items-center gap-3 px-3 py-2 hover:bg-secondary transition text-left"
+                      >
+                        <img
+                          src={p.imgSrc}
+                          alt={p.name}
+                          className="w-10 h-10 rounded object-cover bg-white border border-border shrink-0"
+                          loading="lazy"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-foreground truncate">
+                            {p.name}
+                          </div>
+                          <div className="text-[11px] text-muted-foreground">
+                            {p.sectionTitle} · {p.pack}
+                          </div>
+                        </div>
+                        <span className="text-sm font-bold text-foreground shrink-0">
+                          ₹{p.price}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                  <li className="border-t border-border">
+                    <button
+                      onClick={() => {
+                        // navigate to first matching category
+                        const slug = results[0]?.sectionSlug;
+                        if (slug) {
+                          navigate({ to: "/category/$slug", params: { slug } });
+                          setFocused(false);
+                        }
+                      }}
+                      className="w-full px-3 py-2 text-sm font-semibold text-primary hover:bg-secondary transition text-center"
+                    >
+                      View all in {results[0]?.sectionTitle} →
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
