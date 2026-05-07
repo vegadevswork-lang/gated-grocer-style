@@ -100,6 +100,32 @@ export function Hero() {
           Shop Now →
         </motion.button>
 
+        {/* Feature badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full max-w-4xl"
+        >
+          {[
+            { icon: "🚚", title: "30 Min Delivery", sub: "To your gate" },
+            { icon: "🌿", title: "Farm Fresh", sub: "Hand picked daily" },
+            { icon: "💰", title: "Best Prices", sub: "Lowest in area" },
+            { icon: "↩️", title: "Easy Returns", sub: "No questions asked" },
+          ].map((f) => (
+            <div
+              key={f.title}
+              className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 text-left"
+            >
+              <span className="text-2xl">{f.icon}</span>
+              <div>
+                <div className="text-sm font-bold leading-tight">{f.title}</div>
+                <div className="text-[11px] text-white/80">{f.sub}</div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
           {slides.map((_, i) => (
             <button
