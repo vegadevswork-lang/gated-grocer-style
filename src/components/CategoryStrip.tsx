@@ -1,16 +1,26 @@
 import { motion } from "framer-motion";
+import vegetables from "@/assets/cat-vegetables.jpg";
+import fruits from "@/assets/cat-fruits.jpg";
+import dairy from "@/assets/cat-dairy.jpg";
+import staples from "@/assets/cat-staples.jpg";
+import snacks from "@/assets/cat-snacks.jpg";
+import beverages from "@/assets/cat-beverages.jpg";
+import personal from "@/assets/cat-personal.jpg";
+import bath from "@/assets/cat-bath.jpg";
+import household from "@/assets/cat-household.jpg";
+import apparel from "@/assets/cat-apparel.jpg";
 
 const categories = [
-  { name: "Vegetables", emoji: "🥬" },
-  { name: "Fruits", emoji: "🍎" },
-  { name: "Dairy", emoji: "🥛" },
-  { name: "Staples", emoji: "🌾" },
-  { name: "Snacks", emoji: "🍿" },
-  { name: "Beverages", emoji: "🧃" },
-  { name: "Personal Care", emoji: "🪥" },
-  { name: "Bath & Soap", emoji: "🧼" },
-  { name: "Household", emoji: "🧴" },
-  { name: "Apparel", emoji: "👕" },
+  { name: "Vegetables", image: vegetables },
+  { name: "Fruits", image: fruits },
+  { name: "Dairy", image: dairy },
+  { name: "Staples", image: staples },
+  { name: "Snacks", image: snacks },
+  { name: "Beverages", image: beverages },
+  { name: "Personal Care", image: personal },
+  { name: "Bath & Soap", image: bath },
+  { name: "Household", image: household },
+  { name: "Apparel", image: apparel },
 ];
 
 export function CategoryStrip() {
@@ -29,10 +39,17 @@ export function CategoryStrip() {
               whileHover={{ y: -4 }}
               className="flex flex-col items-center gap-2 group"
             >
-              <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center text-2xl group-hover:bg-primary/15 transition-colors">
-                {c.emoji}
+              <div className="w-16 h-16 rounded-full overflow-hidden bg-secondary ring-1 ring-border group-hover:ring-primary transition">
+                <img
+                  src={c.image}
+                  alt={c.name}
+                  loading="lazy"
+                  width={512}
+                  height={512}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
               </div>
-              <span className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground group-hover:text-primary transition-colors">
+              <span className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground group-hover:text-primary transition-colors text-center">
                 {c.name}
               </span>
             </motion.a>
