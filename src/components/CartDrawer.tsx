@@ -1,27 +1,41 @@
+import { useMemo, useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
+import { Minus, Plus, Trash2, ShoppingBag, Copy, Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 const WHATSAPP_NUMBER = "919398787108";
+const WHATSAPP_DISPLAY = "+91 93987 87108";
 
 export function CartDrawer() {
   const { items, isOpen, setOpen, setQty, remove, subtotal, clear } = useCart();
+  const [copied, setCopied] = useState(false);
 
-  const handleBuy = () => {
-    if (items.length === 0) return;
+  const orderText = useMemo(() => {
     const lines = items.map(
       (i, n) => `${n + 1}. ${i.name} x${i.qty} — ₹${i.price * i.qty}`,
     );
-    const msg = [
+    return [
       "Hi! I'd like to place an order:",
       "",
       ...lines,
       "",
       `Subtotal: ₹${subtotal}`,
     ].join("\n");
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-    window.open(url, "_blank");
+  }, [items, subtotal]);
+
+  const text = encodeURIComponent(orderText);
+  // wa.me is the official short link — works on mobile and desktop without hitting api.whatsapp.com directly
+  const waMeUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(orderText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      /* ignore */
+    }
   };
 
   return (
@@ -83,16 +97,35 @@ export function CartDrawer() {
             <span className="text-muted-foreground">Subtotal</span>
             <span className="font-bold text-lg">₹{subtotal}</span>
           </div>
-          <Button onClick={handleBuy} disabled={items.length === 0} className="w-full" size="lg">
-            Buy on WhatsApp
-          </Button>
-          {items.length > 0 && (
-            <button
-              onClick={clear}
-              className="w-full text-xs text-muted-foreground hover:text-foreground"
+
+          {/* Render as <a> so it's a real top-level navigation (popup blockers + api.whatsapp.com workarounds) */}
+          <Button asChild disabled={items.length === 0} className="w-full" size="lg">
+            <a
+              href={items.length === 0 ? undefined : waMeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-disabled={items.length === 0}
             >
-              Clear cart
-            </button>
+              Buy on WhatsApp
+            </a>
+          </Button>
+
+          {items.length > 0 && (
+            <>
+              <button
+                onClick={handleCopy}
+                className="w-full text-xs text-muted-foreground hover:text-foreground flex items-center justify-center gap-1.5"
+              >
+                {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                {copied ? "Copied!" : `If WhatsApp doesn't open, copy order & message ${WHATSAPP_DISPLAY}`}
+              </button>
+              <button
+                onClick={clear}
+                className="w-full text-xs text-muted-foreground hover:text-foreground"
+              >
+                Clear cart
+              </button>
+            </>
           )}
         </div>
       </SheetContent>
