@@ -102,15 +102,6 @@ export function Header() {
         </div>
       </div>
 
-      <nav className="border-t border-border bg-secondary/40">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center gap-6 overflow-x-auto text-sm">
-          {["Home", "Vegetables", "Fruits", "Groceries", "Dairy", "Men", "Women", "Kids", "Offers"].map((n) => (
-            <a key={n} href="#" className="story-link whitespace-nowrap text-foreground/80 hover:text-foreground font-medium">
-              {n}
-            </a>
-          ))}
-        </div>
-      </nav>
     </header>
   );
 }
