@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Truck, Leaf, BadgePercent, RotateCcw } from "lucide-react";
 import heroTomatoes from "@/assets/hero-tomatoes.jpg";
 import heroVeggies from "@/assets/hero-veggies.jpg";
 import heroGroceries from "@/assets/hero-groceries.jpg";
@@ -105,24 +106,35 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full max-w-4xl"
+          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-5xl"
         >
           {[
-            { icon: "🚚", title: "30 Min Delivery", sub: "To your gate" },
-            { icon: "🌿", title: "Farm Fresh", sub: "Hand picked daily" },
-            { icon: "💰", title: "Best Prices", sub: "Lowest in area" },
-            { icon: "↩️", title: "Easy Returns", sub: "No questions asked" },
-          ].map((f) => (
-            <div
+            { Icon: Truck, title: "30 Min Delivery", sub: "Right to your gate" },
+            { Icon: Leaf, title: "Farm Fresh", sub: "Hand-picked daily" },
+            { Icon: BadgePercent, title: "Best Prices", sub: "Lowest in your area" },
+            { Icon: RotateCcw, title: "Easy Returns", sub: "No questions asked" },
+          ].map((f, i) => (
+            <motion.div
               key={f.title}
-              className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 text-left"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 + i * 0.08 }}
+              whileHover={{ y: -4 }}
+              className="group relative flex items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/25 rounded-2xl px-5 py-4 text-left overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.25)] hover:bg-white/15 hover:border-white/40 transition-all"
             >
-              <span className="text-2xl">{f.icon}</span>
-              <div>
-                <div className="text-sm font-bold leading-tight">{f.title}</div>
-                <div className="text-[11px] text-white/80">{f.sub}</div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-white/30 to-white/5 border border-white/30 flex items-center justify-center">
+                <f.Icon className="w-5 h-5 text-white" strokeWidth={2.2} />
               </div>
-            </div>
+              <div className="relative">
+                <div className="text-sm font-bold leading-tight tracking-tight">
+                  {f.title}
+                </div>
+                <div className="text-[11px] text-white/75 mt-0.5 uppercase tracking-wider">
+                  {f.sub}
+                </div>
+              </div>
+            </motion.div>
           ))}
         </motion.div>
 
