@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Minus, Plus, Trash2, ShoppingBag, Copy, Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
-const WHATSAPP_NUMBER = "919398787108";
+const WHATSAPP_LINK = "https://wa.link/98958w";
 const WHATSAPP_DISPLAY = "+91 93987 87108";
 
 export function CartDrawer() {
@@ -24,9 +24,8 @@ export function CartDrawer() {
     ].join("\n");
   }, [items, subtotal]);
 
-  const text = encodeURIComponent(orderText);
-  // wa.me is the official short link — works on mobile and desktop without hitting api.whatsapp.com directly
-  const waMeUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+  // Use the user's wa.link short link (it has its own preset message, but we still copy the order to clipboard)
+  const waMeUrl = WHATSAPP_LINK;
 
   const handleCopy = async () => {
     try {
