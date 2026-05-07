@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 import casualShirt from "@/assets/clothing/casual-shirt.jpg";
 import cottonSocks from "@/assets/clothing/cotton-socks.jpg";
 import ethnicSet from "@/assets/clothing/ethnic-set.jpg";
@@ -195,6 +196,8 @@ const sections: Section[] = [
 
 function ProductCard({ product, i }: { product: Product; i: number }) {
   const off = product.oldPrice ? Math.max(1, product.oldPrice - product.price) : 0;
+  const { add } = useCart();
+  const imgSrc = product.img ?? imgFor(product.query);
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -205,12 +208,15 @@ function ProductCard({ product, i }: { product: Product; i: number }) {
     >
       <div className="relative aspect-square bg-white">
         <img
-          src={product.img ?? imgFor(product.query)}
+          src={imgSrc}
           alt={product.name}
           loading="lazy"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <button className="absolute bottom-2 right-2 px-3 py-1 rounded-md bg-white border-2 border-primary text-primary text-xs font-bold tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors">
+        <button
+          onClick={() => add({ id: product.name, name: product.name, price: product.price, img: imgSrc })}
+          className="absolute bottom-2 right-2 px-3 py-1 rounded-md bg-white border-2 border-primary text-primary text-xs font-bold tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors"
+        >
           ADD
         </button>
       </div>

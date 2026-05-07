@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 import grapes from "@/assets/p-grapes.jpg";
 import corn from "@/assets/p-corn.jpg";
 import tomatoes from "@/assets/p-tomatoes.jpg";
@@ -72,6 +73,7 @@ const products: Product[] = [
 
 function ProductCard({ product, i }: { product: Product; i: number }) {
   const off = product.oldPrice ? Math.max(1, product.oldPrice - product.price) : 0;
+  const { add } = useCart();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -87,7 +89,10 @@ function ProductCard({ product, i }: { product: Product; i: number }) {
           loading="lazy"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <button className="absolute bottom-2 right-2 px-3 py-1 rounded-md bg-white border-2 border-primary text-primary text-xs font-bold tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors">
+        <button
+          onClick={() => add({ id: product.name, name: product.name, price: product.price, img: product.img })}
+          className="absolute bottom-2 right-2 px-3 py-1 rounded-md bg-white border-2 border-primary text-primary text-xs font-bold tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors"
+        >
           ADD
         </button>
       </div>
