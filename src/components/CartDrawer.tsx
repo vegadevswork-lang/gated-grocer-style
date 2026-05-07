@@ -97,16 +97,18 @@ export function CartDrawer() {
             <span className="font-bold text-lg">₹{subtotal}</span>
           </div>
 
-          {/* Render as <a> so it's a real top-level navigation (popup blockers + api.whatsapp.com workarounds) */}
-          <Button asChild disabled={items.length === 0} className="w-full" size="lg">
-            <a
-              href={items.length === 0 ? undefined : waMeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-disabled={items.length === 0}
-            >
-              Buy on WhatsApp
-            </a>
+          {/* Copy order to clipboard, then open the WhatsApp short link in a new tab */}
+          <Button
+            onClick={async () => {
+              if (items.length === 0) return;
+              await handleCopy();
+              window.open(waMeUrl, "_blank", "noopener,noreferrer");
+            }}
+            disabled={items.length === 0}
+            className="w-full"
+            size="lg"
+          >
+            Buy on WhatsApp
           </Button>
 
           {items.length > 0 && (
