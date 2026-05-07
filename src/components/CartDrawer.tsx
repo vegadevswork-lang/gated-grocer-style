@@ -23,7 +23,6 @@ export function CartDrawer() {
     ].join("\n");
   }, [items, subtotal]);
 
-  // Use the user's wa.link short link (it has its own preset message, but we still copy the order to clipboard)
   const waMeUrl = WHATSAPP_LINK;
 
   const handleCopy = async () => {
