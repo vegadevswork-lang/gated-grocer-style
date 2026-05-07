@@ -61,9 +61,9 @@ function Marquee({
 }) {
   const loop = [...items, ...items];
   return (
-    <div className="relative flex-1 overflow-hidden h-12 mask-fade">
+    <div className="relative flex-1 overflow-hidden h-14 mask-fade">
       <motion.div
-        className="flex gap-3 absolute whitespace-nowrap items-center h-full"
+        className="flex gap-4 absolute whitespace-nowrap items-center h-full px-2"
         animate={{
           x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"],
         }}
@@ -76,7 +76,7 @@ function Marquee({
         {loop.map((item, i) => (
           <span
             key={i}
-            className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80 bg-secondary/60 pl-1 pr-3 py-1 rounded-full border border-border/60"
+            className="inline-flex items-center gap-2.5 text-sm font-medium text-foreground/80 bg-secondary/60 pl-1.5 pr-4 py-1.5 rounded-full border border-border/60 shadow-sm"
           >
             <img
               src={item.image}
@@ -84,9 +84,9 @@ function Marquee({
               loading="lazy"
               width={512}
               height={512}
-              className="w-7 h-7 rounded-full object-cover ring-1 ring-border"
+              className="w-8 h-8 rounded-full object-cover ring-1 ring-border shrink-0"
             />
-            {item.name}
+            <span className="leading-none">{item.name}</span>
           </span>
         ))}
       </motion.div>
