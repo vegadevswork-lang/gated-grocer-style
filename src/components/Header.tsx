@@ -134,13 +134,14 @@ export function Header() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <div className="flex-1 relative">
+        <div className="flex-1 relative" ref={wrapRef}>
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground z-10" />
           <input
             type="text"
             aria-label="Search products"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => setFocused(true)}
             className="w-full h-11 pl-10 pr-9 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
             placeholder=""
           />
