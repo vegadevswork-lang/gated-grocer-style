@@ -119,7 +119,7 @@ export function Header() {
             }}
             style={{
               backgroundImage:
-                "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent-foreground)), hsl(var(--destructive)), hsl(var(--primary)))",
+                "linear-gradient(90deg, var(--primary), var(--accent-foreground), var(--destructive), var(--primary))",
               backgroundSize: "300% 100%",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
