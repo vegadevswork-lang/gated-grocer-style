@@ -118,8 +118,8 @@ export function Hero() {
             },
             {
               Icon: Leaf,
-              title: "Farm Fresh",
-              sub: "Hand-picked daily",
+              title: "Everything In One",
+              sub: "All groceries, one stop",
               gradient: "from-emerald-400 to-green-600",
               glow: "shadow-[0_0_24px_rgba(52,211,153,0.45)]",
             },
