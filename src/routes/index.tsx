@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero";
 import { BigCategoryCards } from "@/components/BigCategoryCards";
 import { PromoBanners } from "@/components/PromoBanners";
 import { ProductGrid } from "@/components/ProductGrid";
+import { CategorySections } from "@/components/CategorySections";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
