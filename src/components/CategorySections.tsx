@@ -50,6 +50,11 @@ import craxImg from "@/assets/snacks/crax.jpg";
 import pinkGuavaImg from "@/assets/fruits/pink-guava.jpg";
 import rawMangoImg from "@/assets/fruits/raw-mango.jpg";
 import watermelonImg from "@/assets/fruits/watermelon.jpg";
+import miniOrangeImg from "@/assets/fruits/mini-orange.jpg";
+import yellakiBananaImg from "@/assets/fruits/yellaki-banana.jpg";
+import greenGrapesImg from "@/assets/fruits/green-grapes.jpg";
+import orangeCarrotImg from "@/assets/vegetables/orange-carrot.jpg";
+import curryLeavesImg from "@/assets/vegetables/curry-leaves.jpg";
 
 type Product = {
   name: string;
@@ -83,16 +88,16 @@ const sections: Section[] = [
       { name: "Green Chilli (Mirapakaya)", price: 10, oldPrice: 12, rating: 4.5, pack: "100 g", tag: "Spicy", query: "green chilli" },
       { name: "Lemon (Nimakaya)", price: 57, oldPrice: 67, rating: 4.7, pack: "200 g", tag: "Citrus", query: "fresh lemon" },
       { name: "Onion (Ulligadda)", price: 25, oldPrice: 32, rating: 4.6, pack: "1 kg", tag: "Daily", query: "red onion" },
-      { name: "Curry Leaves (Karivepaku)", price: 12, oldPrice: 13, rating: 4.6, pack: "50 g", tag: "Aromatic", query: "curry leaves" },
-      { name: "Orange Carrot", price: 29, oldPrice: 36, rating: 4.7, pack: "500 g", tag: "Root", query: "orange carrots" },
+      { name: "Curry Leaves (Karivepaku)", price: 12, oldPrice: 13, rating: 4.6, pack: "50 g", tag: "Aromatic", query: "curry leaves", img: curryLeavesImg },
+      { name: "Orange Carrot", price: 29, oldPrice: 36, rating: 4.7, pack: "500 g", tag: "Root", query: "orange carrots", img: orangeCarrotImg },
     ],
   },
   {
     title: "Fruits",
     products: [
-      { name: "Green Grapes - Seedless", price: 91, oldPrice: 108, rating: 4.7, pack: "480 g", tag: "Fresh", query: "green grapes" },
-      { name: "Yellaki Banana", price: 56, oldPrice: 72, rating: 4.6, pack: "500 g", tag: "Sweet", query: "yellow banana bunch" },
-      { name: "Mini Orange (Imported)", price: 87, oldPrice: 100, rating: 4.7, pack: "200 g", tag: "Imported", query: "mandarin orange" },
+      { name: "Green Grapes - Seedless", price: 91, oldPrice: 108, rating: 4.7, pack: "480 g", tag: "Fresh", query: "green grapes", img: greenGrapesImg },
+      { name: "Yellaki Banana", price: 56, oldPrice: 72, rating: 4.6, pack: "500 g", tag: "Sweet", query: "yellow banana bunch", img: yellakiBananaImg },
+      { name: "Mini Orange (Imported)", price: 87, oldPrice: 100, rating: 4.7, pack: "200 g", tag: "Imported", query: "mandarin orange", img: miniOrangeImg },
       { name: "Kiran Watermelon", price: 98, oldPrice: 116, rating: 4.7, pack: "2 kg", tag: "Summer", query: "watermelon slice", img: watermelonImg },
       { name: "Raw Mango (Mamidikaya)", price: 23, oldPrice: 28, rating: 4.5, pack: "500 g", tag: "Tangy", query: "raw green mango", img: rawMangoImg },
       { name: "Thai Pink Guava", price: 82, oldPrice: 104, rating: 4.6, pack: "400 g", tag: "Premium", query: "pink guava", img: pinkGuavaImg },
