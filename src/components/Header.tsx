@@ -103,8 +103,29 @@ export function Header() {
         <Link to="/" className="shrink-0 px-4 text-center select-none">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-display text-2xl md:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-accent-foreground to-primary bg-clip-text text-transparent"
+            animate={{
+              opacity: 1,
+              y: 0,
+              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            }}
+            transition={{
+              opacity: { duration: 0.4 },
+              y: { duration: 0.4 },
+              backgroundPosition: {
+                duration: 6,
+                ease: "linear",
+                repeat: Infinity,
+              },
+            }}
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent-foreground)), hsl(var(--destructive)), hsl(var(--primary)))",
+              backgroundSize: "300% 100%",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+            className="font-display text-2xl md:text-3xl font-extrabold tracking-tight"
           >
             AMAR SUPERMARKET
           </motion.div>
