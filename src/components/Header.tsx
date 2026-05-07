@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { MapPin, Search, ChevronDown, ShoppingCart, User, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useSearch } from "@/context/SearchContext";
+import { allProducts } from "@/data/products";
+import { useProductDetail } from "@/context/ProductDetailContext";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -43,6 +45,23 @@ export function Header() {
   const { count, subtotal, setOpen } = useCart();
   const { query, setQuery } = useSearch();
   const [address, setAddress] = useState(addresses[0]);
+  const [focused, setFocused] = useState(false);
+  const navigate = useNavigate();
+  const { open: openProduct } = useProductDetail();
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  const q = query.trim().toLowerCase();
+  const results = useMemo(() => {
+    if (!q) return [];
+    return allProducts
+      .filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.tag?.toLowerCase().includes(q) ||
+          p.sectionTitle.toLowerCase().includes(q),
+      )
+      .slice(0, 8);
+  }, [q]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -50,6 +69,16 @@ export function Header() {
     }, 2000);
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setFocused(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
+
+  const showDropdown = focused && q.length > 0;
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
@@ -105,13 +134,14 @@ export function Header() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <div className="flex-1 relative">
+        <div className="flex-1 relative" ref={wrapRef}>
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground z-10" />
           <input
             type="text"
             aria-label="Search products"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => setFocused(true)}
             className="w-full h-11 pl-10 pr-9 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
             placeholder=""
           />
@@ -137,6 +167,73 @@ export function Header() {
                 </span>
                 ...
               </div>
+            </div>
+          )}
+
+          {showDropdown && (
+            <div className="absolute left-0 right-0 top-12 bg-card border border-border rounded-lg shadow-elegant max-h-96 overflow-y-auto z-50">
+              {results.length === 0 ? (
+                <div className="px-4 py-6 text-sm text-muted-foreground text-center">
+                  No products match "<span className="font-semibold text-foreground">{query}</span>"
+                </div>
+              ) : (
+                <ul className="py-1">
+                  {results.map((p) => (
+                    <li key={p.name}>
+                      <button
+                        onClick={() => {
+                          openProduct({
+                            id: p.name,
+                            name: p.name,
+                            price: p.price,
+                            oldPrice: p.oldPrice,
+                            pack: p.pack,
+                            tag: p.tag,
+                            rating: p.rating,
+                            img: p.imgSrc,
+                            inStock: 24,
+                          });
+                          setFocused(false);
+                        }}
+                        className="w-full flex items-center gap-3 px-3 py-2 hover:bg-secondary transition text-left"
+                      >
+                        <img
+                          src={p.imgSrc}
+                          alt={p.name}
+                          className="w-10 h-10 rounded object-cover bg-white border border-border shrink-0"
+                          loading="lazy"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-foreground truncate">
+                            {p.name}
+                          </div>
+                          <div className="text-[11px] text-muted-foreground">
+                            {p.sectionTitle} · {p.pack}
+                          </div>
+                        </div>
+                        <span className="text-sm font-bold text-foreground shrink-0">
+                          ₹{p.price}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                  <li className="border-t border-border">
+                    <button
+                      onClick={() => {
+                        // navigate to first matching category
+                        const slug = results[0]?.sectionSlug;
+                        if (slug) {
+                          navigate({ to: "/category/$slug", params: { slug } });
+                          setFocused(false);
+                        }
+                      }}
+                      className="w-full px-3 py-2 text-sm font-semibold text-primary hover:bg-secondary transition text-center"
+                    >
+                      View all in {results[0]?.sectionTitle} →
+                    </button>
+                  </li>
+                </ul>
+              )}
             </div>
           )}
         </div>
