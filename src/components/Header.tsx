@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { MapPin, Search, ChevronDown, ShoppingCart, User } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const groceryNames = [
   "Fresh Spinach",
@@ -22,6 +23,7 @@ const groceryNames = [
 
 export function Header() {
   const [index, setIndex] = useState(0);
+  const { count, subtotal, setOpen } = useCart();
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -106,20 +108,23 @@ export function Header() {
           </button>
 
           <button
+            onClick={() => setOpen(true)}
             className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition"
             aria-label="Cart"
           >
             <div className="relative">
               <ShoppingCart className="w-5 h-5" />
-              <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                3
-              </span>
+              {count > 0 && (
+                <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  {count}
+                </span>
+              )}
             </div>
             <div className="hidden md:block text-left leading-tight">
               <div className="text-[10px] uppercase tracking-wider opacity-80">
                 My Cart
               </div>
-              <div className="text-sm font-semibold">₹ 480</div>
+              <div className="text-sm font-semibold">₹ {subtotal}</div>
             </div>
           </button>
         </div>
