@@ -57,7 +57,7 @@ function CategoryPage() {
           </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-          {section.products.map((p, i) => (
+          {section.products.map((p: typeof section.products[number], i: number) => (
             <ProductCard key={p.name} product={p} i={i} />
           ))}
         </div>
