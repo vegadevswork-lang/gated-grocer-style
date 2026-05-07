@@ -37,11 +37,12 @@ export function Header() {
           <div
             style={{
               backgroundImage:
-                "linear-gradient(90deg, var(--primary), var(--accent-foreground), var(--destructive), var(--primary))",
+                "linear-gradient(90deg, #d4af37, #ff6b6b, #4ecdc4, #845ec2, #ffb84d, #d4af37)",
               backgroundSize: "300% 100%",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
               color: "transparent",
+              animation: "amarShift 6s linear infinite",
             }}
             className="font-display text-xl md:text-2xl font-extrabold tracking-tight"
           >
