@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import vegetables from "@/assets/cat-vegetables.jpg";
 import fruits from "@/assets/cat-fruits.jpg";
 import household from "@/assets/cat-household.jpg";
@@ -5,41 +6,14 @@ import apparel from "@/assets/cat-apparel.jpg";
 import snacks from "@/assets/cat-snacks.jpg";
 
 const cards = [
-  {
-    name: "Vegetables",
-    tag: "Farm Fresh",
-    image: vegetables,
-    color: "from-green-500/30 to-emerald-700/40",
-    target: "cat-vegetables",
-  },
-  {
-    name: "Fruits",
-    tag: "Hand Picked",
-    image: fruits,
-    color: "from-orange-500/30 to-red-600/40",
-    target: "cat-fruits",
-  },
-  {
-    name: "Home Essentials",
-    tag: "Daily Needs",
-    image: household,
-    color: "from-blue-500/30 to-indigo-700/40",
-    target: "cat-spices-and-seasonings",
-  },
-  {
-    name: "Clothes",
-    tag: "New Arrivals",
-    image: apparel,
-    color: "from-pink-500/30 to-purple-700/40",
-    target: "cat-clothing",
-  },
-  {
-    name: "Others",
-    tag: "Snacks & More",
-    image: snacks,
-    color: "from-amber-500/30 to-yellow-700/40",
-    target: "cat-snacks",
-  },
+  { name: "Vegetables", tag: "Farm Fresh", image: vegetables, color: "from-green-500/30 to-emerald-700/40", slug: "vegetables" },
+  { name: "Fruits", tag: "Hand Picked", image: fruits, color: "from-orange-500/30 to-red-600/40", slug: "fruits" },
+  { name: "Home Essentials", tag: "Daily Needs", image: household, color: "from-blue-500/30 to-indigo-700/40", slug: "spices-and-seasonings" },
+  { name: "Clothes", tag: "New Arrivals", image: apparel, color: "from-pink-500/30 to-purple-700/40", slug: "clothing" },
+  { name: "Snacks", tag: "Crunchy Bites", image: snacks, color: "from-amber-500/30 to-yellow-700/40", slug: "snacks" },
+  { name: "Drinks", tag: "Refreshing", image: snacks, color: "from-cyan-500/30 to-blue-700/40", slug: "drinks" },
+  { name: "Dairy Products", tag: "Daily Fresh", image: household, color: "from-yellow-400/30 to-orange-600/40", slug: "dairy-products" },
+  { name: "Chocolates & Candies", tag: "Sweet Treats", image: snacks, color: "from-rose-500/30 to-fuchsia-700/40", slug: "chocolates-and-candies" },
 ];
 
 export function BigCategoryCards() {
@@ -60,15 +34,10 @@ export function BigCategoryCards() {
       <div className="relative overflow-hidden mask-fade">
         <div className="flex gap-5 animate-[wipeMarquee_30s_linear_infinite] hover:[animation-play-state:paused]">
           {loop.map((c, i) => (
-            <a
+            <Link
               key={i}
-              href={`#${c.target}`}
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById(c.target)
-                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
-              }}
+              to="/category/$slug"
+              params={{ slug: c.slug }}
               className="group relative shrink-0 w-[280px] md:w-[320px] h-[200px] rounded-2xl overflow-hidden border border-border shadow-elegant cursor-pointer"
             >
               <img
