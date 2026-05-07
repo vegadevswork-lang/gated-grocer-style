@@ -28,6 +28,7 @@ function Index() {
       <main>
         <Hero />
         <CategoryStrip />
+        <BigCategoryCards />
         <PromoBanners />
         <ProductGrid />
       </main>
