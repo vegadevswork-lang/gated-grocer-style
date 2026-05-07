@@ -128,6 +128,10 @@ export function Header() {
           0% { transform: translateY(100%); opacity: 0; }
           100% { transform: translateY(0); opacity: 1; }
         }
+        @keyframes amarShift {
+          0% { background-position: 0% 50%; }
+          100% { background-position: 300% 50%; }
+        }
       `}</style>
     </header>
   );
