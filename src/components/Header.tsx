@@ -45,6 +45,23 @@ export function Header() {
   const { count, subtotal, setOpen } = useCart();
   const { query, setQuery } = useSearch();
   const [address, setAddress] = useState(addresses[0]);
+  const [focused, setFocused] = useState(false);
+  const navigate = useNavigate();
+  const { open: openProduct } = useProductDetail();
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  const q = query.trim().toLowerCase();
+  const results = useMemo(() => {
+    if (!q) return [];
+    return allProducts
+      .filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.tag?.toLowerCase().includes(q) ||
+          p.sectionTitle.toLowerCase().includes(q),
+      )
+      .slice(0, 8);
+  }, [q]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -52,6 +69,16 @@ export function Header() {
     }, 2000);
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setFocused(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
+
+  const showDropdown = focused && q.length > 0;
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
