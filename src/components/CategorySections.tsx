@@ -20,6 +20,16 @@ import mtrDosaImg from "@/assets/instant/mtr-dosa.jpg";
 import bournvilleImg from "@/assets/chocolates/bournville.jpg";
 import silkGanacheImg from "@/assets/chocolates/silk-ganache.jpg";
 import munchMaxImg from "@/assets/chocolates/munch-max.jpg";
+import amulDarkImg from "@/assets/chocolates/amul-dark.jpg";
+import kitkatImg from "@/assets/chocolates/kitkat.jpg";
+import silkHazelnutImg from "@/assets/chocolates/silk-hazelnut.jpg";
+import amulGoldImg from "@/assets/dairy/amul-gold.jpg";
+import heritageCupCurdImg from "@/assets/dairy/heritage-cup-curd.jpg";
+import amulTaazaImg from "@/assets/dairy/amul-taaza.jpg";
+import amulCurdImg from "@/assets/dairy/amul-curd.jpg";
+import heritagePouchCurdImg from "@/assets/dairy/heritage-pouch-curd.jpg";
+import heritageTonedMilkImg from "@/assets/dairy/heritage-toned-milk.jpg";
+import corianderPowderImg from "@/assets/spices/coriander-powder.jpg";
 
 type Product = {
   name: string;
@@ -98,26 +108,26 @@ const sections: Section[] = [
       { name: "L.G Compounded Hing Powder", price: 101, oldPrice: 102, rating: 4.7, pack: "50 g", tag: "Aromatic", query: "asafoetida hing" },
       { name: "Aashirvaad Lal Mirch Powder", price: 209, oldPrice: 325, rating: 4.7, pack: "500 g", tag: "Hot", query: "lal mirch powder" },
       { name: "Aashirvaad Kashmiri Chilli", price: 99, oldPrice: 140, rating: 4.6, pack: "100 g", tag: "Mild", query: "kashmiri chilli powder" },
-      { name: "Aashirvaad Coriander Powder", price: 32, oldPrice: 46, rating: 4.6, pack: "100 g", tag: "Fresh", query: "coriander powder pack" },
+      { name: "Aashirvaad Coriander Powder", price: 32, oldPrice: 46, rating: 4.6, pack: "100 g", tag: "Fresh", query: "coriander powder pack", img: corianderPowderImg },
     ],
   },
   {
     title: "Dairy Products",
     products: [
-      { name: "Heritage Daily Health Toned Milk", price: 32, oldPrice: 35, rating: 4.7, pack: "500 ml", tag: "Daily", query: "milk packet pouch" },
-      { name: "Heritage Total Pouch Curd", price: 48, oldPrice: 50, rating: 4.6, pack: "500 g", tag: "Curd", query: "curd pouch packet" },
-      { name: "Amul Pouch Curd", price: 50, oldPrice: 55, rating: 4.7, pack: "800 g", tag: "Fresh", query: "amul curd pouch" },
-      { name: "Amul Taaza Toned Milk", price: 29, oldPrice: 32, rating: 4.7, pack: "500 ml", tag: "Toned", query: "amul milk pouch" },
-      { name: "Heritage Soothing Cup Curd", price: 110, oldPrice: 115, rating: 4.6, pack: "1 kg", tag: "Family", query: "yogurt tub" },
-      { name: "Amul Gold Full Cream Milk", price: 36, oldPrice: 40, rating: 4.8, pack: "500 ml", tag: "Full Cream", query: "amul gold milk" },
+      { name: "Heritage Daily Health Toned Milk", price: 32, oldPrice: 35, rating: 4.7, pack: "500 ml", tag: "Daily", query: "milk packet pouch", img: heritageTonedMilkImg },
+      { name: "Heritage Total Pouch Curd", price: 48, oldPrice: 50, rating: 4.6, pack: "500 g", tag: "Curd", query: "curd pouch packet", img: heritagePouchCurdImg },
+      { name: "Amul Pouch Curd", price: 50, oldPrice: 55, rating: 4.7, pack: "800 g", tag: "Fresh", query: "amul curd pouch", img: amulCurdImg },
+      { name: "Amul Taaza Toned Milk", price: 29, oldPrice: 32, rating: 4.7, pack: "500 ml", tag: "Toned", query: "amul milk pouch", img: amulTaazaImg },
+      { name: "Heritage Soothing Cup Curd", price: 110, oldPrice: 115, rating: 4.6, pack: "1 kg", tag: "Family", query: "yogurt tub", img: heritageCupCurdImg },
+      { name: "Amul Gold Full Cream Milk", price: 36, oldPrice: 40, rating: 4.8, pack: "500 ml", tag: "Full Cream", query: "amul gold milk", img: amulGoldImg },
     ],
   },
   {
     title: "Chocolates & Candies",
     products: [
-      { name: "Cadbury Dairy Milk Silk Hazelnut", price: 204, oldPrice: 214, rating: 4.8, pack: "134 g", tag: "Hazelnut", query: "dairy milk silk hazelnut" },
-      { name: "Nestle KitKat 4 Fingers", price: 30, oldPrice: 35, rating: 4.7, pack: "38.5 g", tag: "Wafer", query: "kitkat chocolate bar" },
-      { name: "Amul Dark Chocolate Bar", price: 45, oldPrice: 55, rating: 4.7, pack: "35 g", tag: "Dark", query: "dark chocolate bar" },
+      { name: "Cadbury Dairy Milk Silk Hazelnut", price: 204, oldPrice: 214, rating: 4.8, pack: "134 g", tag: "Hazelnut", query: "dairy milk silk hazelnut", img: silkHazelnutImg },
+      { name: "Nestle KitKat 4 Fingers", price: 30, oldPrice: 35, rating: 4.7, pack: "38.5 g", tag: "Wafer", query: "kitkat chocolate bar", img: kitkatImg },
+      { name: "Amul Dark Chocolate Bar", price: 45, oldPrice: 55, rating: 4.7, pack: "35 g", tag: "Dark", query: "dark chocolate bar", img: amulDarkImg },
       { name: "Nestle Munch Max Crunchy Wafer", price: 20, oldPrice: 25, rating: 4.6, pack: "38.5 g", tag: "Crunchy", query: "munch chocolate wafer", img: munchMaxImg },
       { name: "Cadbury Dairy Milk Silk Ganache", price: 204, oldPrice: 214, rating: 4.8, pack: "137 g", tag: "Ganache", query: "dairy milk silk chocolate", img: silkGanacheImg },
       { name: "Cadbury Bournville 70% Dark", price: 125, oldPrice: 145, rating: 4.8, pack: "80 g", tag: "Premium", query: "bournville dark chocolate", img: bournvilleImg },
