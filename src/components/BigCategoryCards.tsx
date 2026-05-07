@@ -60,7 +60,7 @@ export function BigCategoryCards() {
                 </div>
                 <div className="text-2xl font-bold font-display">{c.name}</div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
