@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { MapPin, Search, ChevronDown } from "lucide-react";
+import { MapPin, Search, ChevronDown, ShoppingCart, User } from "lucide-react";
 
 const groceryNames = [
   "Fresh Spinach",
