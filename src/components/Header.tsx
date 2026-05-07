@@ -2,44 +2,68 @@ import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ShoppingCart, Search, User } from "lucide-react";
 
-const leftItems = [
-  "🥬 Spinach",
-  "🥕 Carrots",
-  "🍅 Tomatoes",
-  "🌾 Rice",
-  "🥛 Milk",
-  "🪥 Toothpaste",
-  "🧼 Soap",
-  "🧴 Shampoo",
-  "🧻 Tissues",
-  "🧽 Cleaners",
+import mSpinach from "@/assets/m-spinach.jpg";
+import mCarrots from "@/assets/m-carrots.jpg";
+import mTomatoes from "@/assets/m-tomatoes.jpg";
+import mRice from "@/assets/m-rice.jpg";
+import mMilk from "@/assets/m-milk.jpg";
+import mToothpaste from "@/assets/m-toothpaste.jpg";
+import mSoap from "@/assets/m-soap.jpg";
+import mShampoo from "@/assets/m-shampoo.jpg";
+import mTissues from "@/assets/m-tissues.jpg";
+import mCleaners from "@/assets/m-cleaners.jpg";
+
+import mTshirt from "@/assets/m-tshirt.jpg";
+import mDress from "@/assets/m-dress.jpg";
+import mJeans from "@/assets/m-jeans.jpg";
+import mJacket from "@/assets/m-jacket.jpg";
+import mKurti from "@/assets/m-kurti.jpg";
+import mSaree from "@/assets/m-saree.jpg";
+import mShirt from "@/assets/m-shirt.jpg";
+import mShorts from "@/assets/m-shorts.jpg";
+import mSocks from "@/assets/m-socks.jpg";
+import mEthnic from "@/assets/m-ethnic.jpg";
+
+type Item = { name: string; image: string };
+
+const leftItems: Item[] = [
+  { name: "Spinach", image: mSpinach },
+  { name: "Carrots", image: mCarrots },
+  { name: "Tomatoes", image: mTomatoes },
+  { name: "Rice", image: mRice },
+  { name: "Milk", image: mMilk },
+  { name: "Toothpaste", image: mToothpaste },
+  { name: "Soap", image: mSoap },
+  { name: "Shampoo", image: mShampoo },
+  { name: "Tissues", image: mTissues },
+  { name: "Cleaners", image: mCleaners },
 ];
 
-const rightItems = [
-  "👕 T-Shirts",
-  "👗 Dresses",
-  "👖 Jeans",
-  "🧥 Jackets",
-  "👚 Kurtis",
-  "🥻 Sarees",
-  "👔 Shirts",
-  "🩳 Shorts",
-  "🧦 Socks",
-  "👘 Ethnic",
+const rightItems: Item[] = [
+  { name: "T-Shirts", image: mTshirt },
+  { name: "Dresses", image: mDress },
+  { name: "Jeans", image: mJeans },
+  { name: "Jackets", image: mJacket },
+  { name: "Kurtis", image: mKurti },
+  { name: "Sarees", image: mSaree },
+  { name: "Shirts", image: mShirt },
+  { name: "Shorts", image: mShorts },
+  { name: "Socks", image: mSocks },
+  { name: "Ethnic", image: mEthnic },
 ];
 
 function Marquee({
   items,
   direction,
 }: {
-  items: string[];
+  items: Item[];
   direction: "left" | "right";
 }) {
   const loop = [...items, ...items];
   return (
-    <div className="relative flex-1 overflow-hidden h-10 mask-fade">
+    <div className="relative flex-1 overflow-hidden h-12 mask-fade">
       <motion.div
-        className="flex gap-6 absolute whitespace-nowrap items-center h-full"
+        className="flex gap-3 absolute whitespace-nowrap items-center h-full"
         animate={{
           x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"],
         }}
@@ -52,9 +76,17 @@ function Marquee({
         {loop.map((item, i) => (
           <span
             key={i}
-            className="text-sm font-medium text-muted-foreground bg-secondary/60 px-3 py-1 rounded-full border border-border/60"
+            className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80 bg-secondary/60 pl-1 pr-3 py-1 rounded-full border border-border/60"
           >
-            {item}
+            <img
+              src={item.image}
+              alt={item.name}
+              loading="lazy"
+              width={512}
+              height={512}
+              className="w-7 h-7 rounded-full object-cover ring-1 ring-border"
+            />
+            {item.name}
           </span>
         ))}
       </motion.div>
@@ -68,10 +100,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
         <Marquee items={leftItems} direction="left" />
 
-        <Link
-          to="/"
-          className="shrink-0 px-4 text-center select-none"
-        >
+        <Link to="/" className="shrink-0 px-4 text-center select-none">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -101,7 +130,6 @@ export function Header() {
           </button>
         </div>
       </div>
-
     </header>
   );
 }
