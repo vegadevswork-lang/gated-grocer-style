@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Minus, Plus, Trash2, ShoppingBag, Copy, Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
-const WHATSAPP_PHONE = "919398787108";
+const WHATSAPP_LINK = "https://wa.link/98958w";
 
 export function CartDrawer() {
   const { items, isOpen, setOpen, setQty, remove, subtotal, clear } = useCart();
@@ -23,8 +23,7 @@ export function CartDrawer() {
     ].join("\n");
   }, [items, subtotal]);
 
-  // Direct wa.me deep link with the order text preset (no api.whatsapp.com, no wa.link redirect)
-  const waMeUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(orderText)}`;
+  const waMeUrl = WHATSAPP_LINK;
 
   const handleCopy = async () => {
     try {
