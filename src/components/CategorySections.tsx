@@ -40,6 +40,16 @@ import spritePackImg from "@/assets/drinks/sprite-pack.png";
 import thumsUp750Img from "@/assets/drinks/thums-up-750.jpg";
 import thumsUpImg from "@/assets/drinks/thums-up.jpg";
 import dietCokeImg from "@/assets/drinks/diet-coke.jpg";
+import spriteImg from "@/assets/drinks/sprite.jpg";
+import kurkureImg from "@/assets/snacks/kurkure.jpg";
+import laysMasalaImg from "@/assets/snacks/lays-masala.jpg";
+import laysCreamOnionImg from "@/assets/snacks/lays-cream-onion.jpg";
+import bingoImg from "@/assets/snacks/bingo.jpg";
+import laysHotSweetImg from "@/assets/snacks/lays-hotsweet.jpg";
+import craxImg from "@/assets/snacks/crax.jpg";
+import pinkGuavaImg from "@/assets/fruits/pink-guava.jpg";
+import rawMangoImg from "@/assets/fruits/raw-mango.jpg";
+import watermelonImg from "@/assets/fruits/watermelon.jpg";
 
 type Product = {
   name: string;
