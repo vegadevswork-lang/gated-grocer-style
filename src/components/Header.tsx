@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { MapPin, Search, ChevronDown } from "lucide-react";
+import { MapPin, Search, ChevronDown, ShoppingCart, User } from "lucide-react";
 
 const groceryNames = [
   "Fresh Spinach",
@@ -86,6 +86,39 @@ export function Header() {
               ...
             </div>
           </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            className="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-secondary/50 hover:bg-secondary transition"
+            aria-label="Login"
+          >
+            <User className="w-5 h-5" />
+            <div className="text-left leading-tight">
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                Hello
+              </div>
+              <div className="text-sm font-semibold">Sign in</div>
+            </div>
+          </button>
+
+          <button
+            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition"
+            aria-label="Cart"
+          >
+            <div className="relative">
+              <ShoppingCart className="w-5 h-5" />
+              <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                3
+              </span>
+            </div>
+            <div className="hidden md:block text-left leading-tight">
+              <div className="text-[10px] uppercase tracking-wider opacity-80">
+                My Cart
+              </div>
+              <div className="text-sm font-semibold">₹ 480</div>
+            </div>
+          </button>
         </div>
       </div>
 
