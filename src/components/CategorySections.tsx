@@ -18,7 +18,9 @@ type Section = {
 
 // Build an image URL from keywords using loremflickr (keyword-based Flickr images)
 const imgFor = (q: string) =>
-  `https://loremflickr.com/400/400/${encodeURIComponent(q)}?lock=${Math.abs(
+  `https://image.pollinations.ai/prompt/${encodeURIComponent(
+    `${q}, product photo, white background, high detail`
+  )}?width=400&height=400&nologo=true&seed=${Math.abs(
     [...q].reduce((a, c) => a + c.charCodeAt(0), 0)
   )}`;
 
