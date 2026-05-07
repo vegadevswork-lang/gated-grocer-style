@@ -1,5 +1,15 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import casualShirt from "@/assets/clothing/casual-shirt.jpg";
+import cottonSocks from "@/assets/clothing/cotton-socks.jpg";
+import ethnicSet from "@/assets/clothing/ethnic-set.jpg";
+import banarasiSaree from "@/assets/clothing/banarasi-saree.jpg";
+import designerKurti from "@/assets/clothing/designer-kurti.jpg";
+import floralDress from "@/assets/clothing/floral-dress.jpg";
+import winterJacket from "@/assets/clothing/winter-jacket.jpg";
+import cottonShorts from "@/assets/clothing/cotton-shorts.jpg";
+import slimJeans from "@/assets/clothing/slim-jeans.jpg";
+import graphicTshirt from "@/assets/clothing/graphic-tshirt.jpg";
 
 type Product = {
   name: string;
@@ -9,6 +19,7 @@ type Product = {
   pack: string;
   tag?: string;
   query: string; // keywords for image search
+  img?: string; // optional local image override
 };
 
 type Section = {
@@ -116,23 +127,21 @@ const sections: Section[] = [
   {
     title: "Clothing",
     products: [
-      { name: "Cotton Round Tee", price: 499, oldPrice: 699, rating: 4.7, pack: "1 pc", tag: "Cotton", query: "white tshirt" },
-      { name: "Slim Fit Shirt", price: 799, oldPrice: 1099, rating: 4.6, pack: "1 pc", tag: "Formal", query: "formal shirt" },
-      { name: "Graphic T-Shirt", price: 449, oldPrice: 599, rating: 4.5, pack: "1 pc", tag: "Casual", query: "graphic tshirt" },
-      { name: "Slim Denim Jeans", price: 999, oldPrice: 1499, rating: 4.7, pack: "1 pc", tag: "Stretch", query: "blue jeans" },
-      { name: "Cotton Shorts", price: 399, oldPrice: 549, rating: 4.5, pack: "1 pc", tag: "Comfort", query: "shorts clothing" },
-      { name: "Winter Jacket", price: 1499, oldPrice: 1999, rating: 4.7, pack: "1 pc", tag: "Warm", query: "winter jacket" },
+      { name: "Graphic T-Shirt", price: 449, oldPrice: 599, rating: 4.5, pack: "1 pc", tag: "Casual", query: "graphic tshirt", img: graphicTshirt },
+      { name: "Casual Shirt", price: 649, oldPrice: 899, rating: 4.6, pack: "1 pc", tag: "Stylish", query: "casual shirt men", img: casualShirt },
+      { name: "Slim Denim Jeans", price: 999, oldPrice: 1499, rating: 4.7, pack: "1 pc", tag: "Stretch", query: "blue jeans", img: slimJeans },
+      { name: "Cotton Shorts", price: 399, oldPrice: 549, rating: 4.5, pack: "1 pc", tag: "Comfort", query: "shorts clothing", img: cottonShorts },
+      { name: "Winter Jacket", price: 1499, oldPrice: 1999, rating: 4.7, pack: "1 pc", tag: "Warm", query: "winter jacket", img: winterJacket },
+      { name: "Cotton Socks Pack", price: 199, oldPrice: 299, rating: 4.5, pack: "Pack of 3", tag: "Combo", query: "socks pack", img: cottonSocks },
     ],
   },
   {
     title: "Fashion",
     products: [
-      { name: "Floral Summer Dress", price: 899, oldPrice: 1299, rating: 4.7, pack: "1 pc", tag: "Trendy", query: "floral dress" },
-      { name: "Designer Kurti", price: 699, oldPrice: 999, rating: 4.6, pack: "1 pc", tag: "Ethnic", query: "indian kurti" },
-      { name: "Banarasi Saree", price: 1899, oldPrice: 2499, rating: 4.8, pack: "1 pc", tag: "Premium", query: "banarasi saree" },
-      { name: "Ethnic Set", price: 1299, oldPrice: 1799, rating: 4.7, pack: "1 pc", tag: "Festive", query: "indian ethnic wear" },
-      { name: "Cotton Socks Pack", price: 199, oldPrice: 299, rating: 4.5, pack: "Pack of 3", tag: "Combo", query: "socks pack" },
-      { name: "Casual Shirt", price: 649, oldPrice: 899, rating: 4.6, pack: "1 pc", tag: "Stylish", query: "casual shirt men" },
+      { name: "Floral Summer Dress", price: 899, oldPrice: 1299, rating: 4.7, pack: "1 pc", tag: "Trendy", query: "floral dress", img: floralDress },
+      { name: "Designer Kurti", price: 699, oldPrice: 999, rating: 4.6, pack: "1 pc", tag: "Ethnic", query: "indian kurti", img: designerKurti },
+      { name: "Banarasi Saree", price: 1899, oldPrice: 2499, rating: 4.8, pack: "1 pc", tag: "Premium", query: "banarasi saree", img: banarasiSaree },
+      { name: "Ethnic Set", price: 1299, oldPrice: 1799, rating: 4.7, pack: "1 pc", tag: "Festive", query: "indian ethnic wear", img: ethnicSet },
     ],
   },
 ];
@@ -149,7 +158,7 @@ function ProductCard({ product, i }: { product: Product; i: number }) {
     >
       <div className="relative aspect-square bg-white">
         <img
-          src={imgFor(product.query)}
+          src={product.img ?? imgFor(product.query)}
           alt={product.name}
           loading="lazy"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
