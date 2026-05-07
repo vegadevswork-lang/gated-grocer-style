@@ -81,9 +81,11 @@ function Marquee({
             <img
               src={item.image}
               alt={item.name}
-              loading="lazy"
-              width={512}
-              height={512}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              width={64}
+              height={64}
               className="w-8 h-8 rounded-full object-cover ring-1 ring-border shrink-0"
             />
             <span className="leading-none">{item.name}</span>
