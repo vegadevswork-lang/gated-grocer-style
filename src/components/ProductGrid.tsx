@@ -8,104 +8,117 @@ import tshirt from "@/assets/p-tshirt.jpg";
 
 type Product = {
   name: string;
-  price: string;
-  oldPrice?: string;
+  price: number;
+  oldPrice?: number;
   rating: number;
+  reviews: string;
+  pack: string;
+  tag?: string;
   img: string;
-  badges?: { label: string; tone: "hot" | "off" | "new" }[];
 };
 
 const products: Product[] = [
   {
-    name: "Fresh Red Seedless",
-    price: "₹60.00 – ₹120.00",
-    rating: 5,
+    name: "Fresh Red Seedless Grapes",
+    price: 60,
+    oldPrice: 75,
+    rating: 4.7,
+    reviews: "73.3k",
+    pack: "500 g",
+    tag: "Fruit",
     img: grapes,
-    badges: [{ label: "Hot", tone: "hot" }, { label: "-20%", tone: "off" }],
   },
   {
     name: "Organic Sweet Corn",
-    price: "₹16.00",
-    oldPrice: "₹19.00",
-    rating: 4,
+    price: 16,
+    oldPrice: 19,
+    rating: 4.6,
+    reviews: "6.3k",
+    pack: "1 pc",
+    tag: "Veggie",
     img: corn,
-    badges: [{ label: "-15%", tone: "off" }],
   },
   {
     name: "Organic Grape Tomatoes",
-    price: "₹79.00",
-    rating: 5,
+    price: 38,
+    oldPrice: 40,
+    rating: 4.7,
+    reviews: "199.5k",
+    pack: "250 g",
+    tag: "Veggie",
     img: tomatoes,
-    badges: [{ label: "Hot", tone: "hot" }],
   },
   {
     name: "Organic Green Cabbage",
-    price: "₹45.00 – ₹65.00",
-    rating: 4,
+    price: 45,
+    oldPrice: 55,
+    rating: 4.6,
+    reviews: "80.2k",
+    pack: "1 pc",
+    tag: "Veggie",
     img: cabbage,
-    badges: [{ label: "-10%", tone: "off" }],
   },
   {
-    name: "Cotton Round Tee",
-    price: "₹499.00",
-    oldPrice: "₹699.00",
-    rating: 5,
+    name: "Cotton Round Neck Tee",
+    price: 499,
+    oldPrice: 699,
+    rating: 4.7,
+    reviews: "28.8k",
+    pack: "1 pc",
+    tag: "Apparel",
     img: tshirt,
-    badges: [{ label: "New", tone: "new" }],
   },
 ];
 
-const toneClass: Record<string, string> = {
-  hot: "bg-destructive text-destructive-foreground",
-  off: "bg-primary text-primary-foreground",
-  new: "bg-accent-foreground text-accent",
-};
-
-function Card({ product, i }: { product: Product; i: number }) {
+function ProductCard({ product, i }: { product: Product; i: number }) {
+  const off = product.oldPrice ? Math.max(1, product.oldPrice - product.price) : 0;
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: i * 0.08 }}
-      whileHover={{ y: -6 }}
-      className="bg-card rounded-2xl border border-border overflow-hidden group"
+      transition={{ duration: 0.4, delay: i * 0.05 }}
+      className="bg-card rounded-xl border border-border overflow-hidden group hover:shadow-md transition-shadow"
     >
-      <div className="relative aspect-square bg-white flex items-center justify-center overflow-hidden">
+      <div className="relative aspect-square bg-white">
         <img
           src={product.img}
           alt={product.name}
           loading="lazy"
-          className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <div className="absolute top-3 left-3 right-3 flex items-start justify-between">
-          <div className="flex flex-col gap-1">
-            {product.badges?.map((b) => (
-              <span
-                key={b.label}
-                className={`${toneClass[b.tone]} text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded`}
-              >
-                {b.label}
-              </span>
-            ))}
-          </div>
-        </div>
+        <button className="absolute bottom-2 right-2 px-3 py-1 rounded-md bg-white border-2 border-primary text-primary text-xs font-bold tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors">
+          ADD
+        </button>
       </div>
-      <div className="p-4 text-center border-t border-border">
-        <h3 className="font-semibold text-foreground line-clamp-1">{product.name}</h3>
-        <div className="mt-1 flex items-center justify-center gap-0.5">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              className={`w-3.5 h-3.5 ${i < product.rating ? "fill-primary text-primary" : "text-muted-foreground/30"}`}
-            />
-          ))}
-        </div>
-        <div className="mt-2 flex items-center justify-center gap-2">
-          {product.oldPrice && (
-            <span className="text-sm text-muted-foreground line-through">{product.oldPrice}</span>
-          )}
-          <span className="text-base font-bold text-primary">{product.price}</span>
+      <div className="p-2.5">
+        {off > 0 && (
+          <div className="flex items-center gap-1.5 mb-1.5">
+            <span className="bg-[oklch(0.55_0.18_145)] text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+              ₹{off} OFF
+            </span>
+          </div>
+        )}
+        <h3 className="text-xs font-semibold text-foreground line-clamp-2 leading-tight min-h-[2rem]">
+          {product.name}
+        </h3>
+        <p className="text-[11px] text-muted-foreground mt-1">{product.pack}</p>
+        {product.tag && (
+          <span className="inline-block mt-1 text-[10px] bg-[oklch(0.95_0.04_180)] text-foreground/70 px-1.5 py-0.5 rounded">
+            {product.tag}
+          </span>
+        )}
+        <div className="mt-1.5 flex items-center justify-between">
+          <div className="flex items-baseline gap-1">
+            <span className="text-sm font-bold text-foreground">₹{product.price}</span>
+            {product.oldPrice && (
+              <span className="text-[11px] text-muted-foreground line-through">₹{product.oldPrice}</span>
+            )}
+          </div>
+          <div className="flex items-center gap-0.5 text-[11px] text-foreground/70">
+            <Star className="w-3 h-3 fill-[oklch(0.65_0.18_145)] text-[oklch(0.55_0.18_145)]" />
+            <span className="font-medium">{product.rating}</span>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -114,20 +127,22 @@ function Card({ product, i }: { product: Product; i: number }) {
 
 export function ProductGrid() {
   return (
-    <section className="max-w-7xl mx-auto px-4 py-16">
-      <div className="text-center mb-10">
-        <h2 className="font-display text-4xl font-extrabold text-foreground inline-block relative">
-          Best Seller
-          <span className="block w-24 h-1 bg-primary mx-auto mt-3 rounded-full" />
-        </h2>
-        <p className="text-muted-foreground mt-3 text-sm uppercase tracking-widest">
-          So you get to know us better
-        </p>
+    <section className="max-w-7xl mx-auto px-4 py-12">
+      <div className="flex items-end justify-between mb-6">
+        <div>
+          <h2 className="font-display text-2xl md:text-3xl font-extrabold text-foreground">
+            Best Sellers
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">Top picks our customers love</p>
+        </div>
+        <button className="text-primary text-sm font-semibold hover:underline">
+          See All →
+        </button>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
         {products.map((p, i) => (
-          <Card key={p.name} product={p} i={i} />
+          <ProductCard key={p.name} product={p} i={i} />
         ))}
       </div>
     </section>
