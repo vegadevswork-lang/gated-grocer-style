@@ -109,10 +109,34 @@ export function Hero() {
           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-5xl"
         >
           {[
-            { Icon: Truck, title: "30 Min Delivery", sub: "Right to your gate" },
-            { Icon: Leaf, title: "Farm Fresh", sub: "Hand-picked daily" },
-            { Icon: BadgePercent, title: "Best Prices", sub: "Lowest in your area" },
-            { Icon: RotateCcw, title: "Easy Returns", sub: "No questions asked" },
+            {
+              Icon: Truck,
+              title: "30 Min Delivery",
+              sub: "Right to your gate",
+              gradient: "from-sky-400 to-blue-600",
+              glow: "shadow-[0_0_24px_rgba(56,189,248,0.45)]",
+            },
+            {
+              Icon: Leaf,
+              title: "Farm Fresh",
+              sub: "Hand-picked daily",
+              gradient: "from-emerald-400 to-green-600",
+              glow: "shadow-[0_0_24px_rgba(52,211,153,0.45)]",
+            },
+            {
+              Icon: BadgePercent,
+              title: "Best Prices",
+              sub: "Lowest in your area",
+              gradient: "from-amber-400 to-orange-600",
+              glow: "shadow-[0_0_24px_rgba(251,191,36,0.45)]",
+            },
+            {
+              Icon: RotateCcw,
+              title: "Easy Returns",
+              sub: "No questions asked",
+              gradient: "from-pink-400 to-rose-600",
+              glow: "shadow-[0_0_24px_rgba(244,114,182,0.45)]",
+            },
           ].map((f, i) => (
             <motion.div
               key={f.title}
@@ -120,17 +144,21 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 + i * 0.08 }}
               whileHover={{ y: -4 }}
-              className="group relative flex items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/25 rounded-2xl px-5 py-4 text-left overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.25)] hover:bg-white/15 hover:border-white/40 transition-all"
+              className="group relative flex items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/25 rounded-2xl px-5 py-4 text-left overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.25)] hover:bg-white/15 hover:border-white/50 transition-all"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="relative shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-white/30 to-white/5 border border-white/30 flex items-center justify-center">
-                <f.Icon className="w-5 h-5 text-white" strokeWidth={2.2} />
+              <div
+                className={`absolute -inset-px rounded-2xl bg-gradient-to-br ${f.gradient} opacity-0 group-hover:opacity-20 transition-opacity`}
+              />
+              <div
+                className={`relative shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br ${f.gradient} ${f.glow} flex items-center justify-center ring-1 ring-white/40`}
+              >
+                <f.Icon className="w-5 h-5 text-white" strokeWidth={2.4} />
               </div>
               <div className="relative">
-                <div className="text-sm font-bold leading-tight tracking-tight">
+                <div className="text-sm font-bold leading-tight tracking-tight text-white">
                   {f.title}
                 </div>
-                <div className="text-[11px] text-white/75 mt-0.5 uppercase tracking-wider">
+                <div className="text-[11px] text-white/80 mt-0.5 uppercase tracking-wider">
                   {f.sub}
                 </div>
               </div>
