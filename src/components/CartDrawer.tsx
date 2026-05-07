@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Minus, Plus, Trash2, ShoppingBag, Copy, Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
-const WHATSAPP_NUMBER = "919398787108";
+const WHATSAPP_LINK = "https://wa.link/98958w";
 const WHATSAPP_DISPLAY = "+91 93987 87108";
 
 export function CartDrawer() {
@@ -24,9 +24,8 @@ export function CartDrawer() {
     ].join("\n");
   }, [items, subtotal]);
 
-  const text = encodeURIComponent(orderText);
-  // wa.me is the official short link — works on mobile and desktop without hitting api.whatsapp.com directly
-  const waMeUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+  // Use the user's wa.link short link (it has its own preset message, but we still copy the order to clipboard)
+  const waMeUrl = WHATSAPP_LINK;
 
   const handleCopy = async () => {
     try {
@@ -98,16 +97,18 @@ export function CartDrawer() {
             <span className="font-bold text-lg">₹{subtotal}</span>
           </div>
 
-          {/* Render as <a> so it's a real top-level navigation (popup blockers + api.whatsapp.com workarounds) */}
-          <Button asChild disabled={items.length === 0} className="w-full" size="lg">
-            <a
-              href={items.length === 0 ? undefined : waMeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-disabled={items.length === 0}
-            >
-              Buy on WhatsApp
-            </a>
+          {/* Copy order to clipboard, then open the WhatsApp short link in a new tab */}
+          <Button
+            onClick={async () => {
+              if (items.length === 0) return;
+              await handleCopy();
+              window.open(waMeUrl, "_blank", "noopener,noreferrer");
+            }}
+            disabled={items.length === 0}
+            className="w-full"
+            size="lg"
+          >
+            Buy on WhatsApp
           </Button>
 
           {items.length > 0 && (
