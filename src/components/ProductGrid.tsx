@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useProductDetail } from "@/context/ProductDetailContext";
 import grapes from "@/assets/p-grapes.jpg";
 import corn from "@/assets/p-corn.jpg";
 import tomatoes from "@/assets/p-tomatoes.jpg";
@@ -74,13 +75,27 @@ const products: Product[] = [
 function ProductCard({ product, i }: { product: Product; i: number }) {
   const off = product.oldPrice ? Math.max(1, product.oldPrice - product.price) : 0;
   const { add } = useCart();
+  const { open } = useProductDetail();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.4, delay: i * 0.05 }}
-      className="bg-card rounded-xl border border-border overflow-hidden group hover:shadow-md transition-shadow"
+      onClick={() =>
+        open({
+          id: product.name,
+          name: product.name,
+          price: product.price,
+          oldPrice: product.oldPrice,
+          pack: product.pack,
+          tag: product.tag,
+          rating: product.rating,
+          img: product.img,
+          inStock: 24,
+        })
+      }
+      className="bg-card rounded-xl border border-border overflow-hidden group hover:shadow-md transition-shadow cursor-pointer"
     >
       <div className="relative aspect-square bg-white">
         <img
@@ -90,7 +105,10 @@ function ProductCard({ product, i }: { product: Product; i: number }) {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
         <button
-          onClick={() => add({ id: product.name, name: product.name, price: product.price, img: product.img })}
+          onClick={(e) => {
+            e.stopPropagation();
+            add({ id: product.name, name: product.name, price: product.price, img: product.img });
+          }}
           className="absolute bottom-2 right-2 px-3 py-1 rounded-md bg-white border-2 border-primary text-primary text-xs font-bold tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors"
         >
           ADD

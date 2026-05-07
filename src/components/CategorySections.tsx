@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useSearch } from "@/context/SearchContext";
+import { useProductDetail } from "@/context/ProductDetailContext";
 import casualShirt from "@/assets/clothing/casual-shirt.jpg";
 import cottonSocks from "@/assets/clothing/cotton-socks.jpg";
 import ethnicSet from "@/assets/clothing/ethnic-set.jpg";
@@ -197,14 +199,28 @@ const sections: Section[] = [
 function ProductCard({ product, i }: { product: Product; i: number }) {
   const off = product.oldPrice ? Math.max(1, product.oldPrice - product.price) : 0;
   const { add } = useCart();
+  const { open } = useProductDetail();
   const imgSrc = product.img ?? imgFor(product.query);
+  const openDetails = () =>
+    open({
+      id: product.name,
+      name: product.name,
+      price: product.price,
+      oldPrice: product.oldPrice,
+      pack: product.pack,
+      tag: product.tag,
+      rating: product.rating,
+      img: imgSrc,
+      inStock: 24,
+    });
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.35, delay: i * 0.03 }}
-      className="bg-card rounded-xl border border-border overflow-hidden group hover:shadow-md transition-shadow"
+      onClick={openDetails}
+      className="bg-card rounded-xl border border-border overflow-hidden group hover:shadow-md transition-shadow cursor-pointer"
     >
       <div className="relative aspect-square bg-white">
         <img
@@ -214,7 +230,10 @@ function ProductCard({ product, i }: { product: Product; i: number }) {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
         <button
-          onClick={() => add({ id: product.name, name: product.name, price: product.price, img: imgSrc })}
+          onClick={(e) => {
+            e.stopPropagation();
+            add({ id: product.name, name: product.name, price: product.price, img: imgSrc });
+          }}
           className="absolute bottom-2 right-2 px-3 py-1 rounded-md bg-white border-2 border-primary text-primary text-xs font-bold tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors"
         >
           ADD
@@ -254,11 +273,36 @@ function ProductCard({ product, i }: { product: Product; i: number }) {
   );
 }
 
+const slugify = (s: string) =>
+  s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 export function CategorySections() {
+  const { query } = useSearch();
+  const q = query.trim().toLowerCase();
+
+  const filtered = q
+    ? sections
+        .map((s) => ({
+          ...s,
+          products: s.products.filter(
+            (p) =>
+              p.name.toLowerCase().includes(q) ||
+              p.tag?.toLowerCase().includes(q) ||
+              s.title.toLowerCase().includes(q),
+          ),
+        }))
+        .filter((s) => s.products.length > 0)
+    : sections;
+
   return (
     <div className="max-w-7xl mx-auto px-4 pb-12 space-y-10">
-      {sections.map((section) => (
-        <section key={section.title}>
+      {q && filtered.length === 0 && (
+        <div className="text-center py-16 text-muted-foreground">
+          No products found for "<span className="font-semibold text-foreground">{query}</span>"
+        </div>
+      )}
+      {filtered.map((section) => (
+        <section key={section.title} id={`cat-${slugify(section.title)}`} className="scroll-mt-24">
           <div className="flex items-end justify-between mb-4">
             <h2 className="font-display text-xl md:text-2xl font-extrabold text-foreground">
               {section.title}

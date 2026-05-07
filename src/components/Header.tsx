@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { MapPin, Search, ChevronDown, ShoppingCart, User } from "lucide-react";
+import { MapPin, Search, ChevronDown, ShoppingCart, User, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useSearch } from "@/context/SearchContext";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 const groceryNames = [
   "Fresh Spinach",
@@ -21,9 +30,19 @@ const groceryNames = [
   "Sports Socks",
 ];
 
+const addresses = [
+  { label: "Prestige Lakeside", sub: "Bangalore · 560048" },
+  { label: "Sobha Dream Acres", sub: "Bangalore · 560067" },
+  { label: "Brigade Gateway", sub: "Bangalore · 560055" },
+  { label: "My Home Bhooja", sub: "Hyderabad · 500032" },
+  { label: "DLF Camellias", sub: "Gurugram · 122002" },
+];
+
 export function Header() {
   const [index, setIndex] = useState(0);
   const { count, subtotal, setOpen } = useCart();
+  const { query, setQuery } = useSearch();
+  const [address, setAddress] = useState(addresses[0]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -54,43 +73,72 @@ export function Header() {
           </div>
         </Link>
 
-        <button
-          className="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-secondary/50 hover:bg-secondary transition shrink-0 max-w-[220px]"
-          aria-label="Choose delivery location"
-        >
-          <MapPin className="w-4 h-4 text-primary shrink-0" />
-          <div className="text-left leading-tight overflow-hidden">
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-              Deliver to
-            </div>
-            <div className="text-sm font-semibold truncate">
-              Prestige Lakeside, Bangalore
-            </div>
-          </div>
-          <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />
-        </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              className="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-secondary/50 hover:bg-secondary transition shrink-0 max-w-[240px]"
+              aria-label="Choose delivery location"
+            >
+              <MapPin className="w-4 h-4 text-primary shrink-0" />
+              <div className="text-left leading-tight overflow-hidden">
+                <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  Deliver to
+                </div>
+                <div className="text-sm font-semibold truncate">{address.label}</div>
+              </div>
+              <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-72">
+            <DropdownMenuLabel>Choose delivery address</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {addresses.map((a) => (
+              <DropdownMenuItem
+                key={a.label}
+                onClick={() => setAddress(a)}
+                className="flex flex-col items-start gap-0.5 cursor-pointer"
+              >
+                <span className="text-sm font-semibold">{a.label}</span>
+                <span className="text-xs text-muted-foreground">{a.sub}</span>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground z-10" />
           <input
             type="text"
             aria-label="Search products"
-            className="w-full h-11 pl-10 pr-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full h-11 pl-10 pr-9 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
             placeholder=""
           />
-          {/* rotating placeholder overlay */}
-          <div className="pointer-events-none absolute left-10 top-0 h-11 flex items-center overflow-hidden">
-            <div
-              key={index}
-              className="text-sm text-muted-foreground animate-[slideUp_0.5s_ease]"
+          {query && (
+            <button
+              onClick={() => setQuery("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              aria-label="Clear search"
             >
-              Search for{" "}
-              <span className="font-semibold text-foreground/80">
-                {groceryNames[index]}
-              </span>
-              ...
+              <X className="w-4 h-4" />
+            </button>
+          )}
+          {/* rotating placeholder overlay — only when input is empty */}
+          {!query && (
+            <div className="pointer-events-none absolute left-10 top-0 h-11 flex items-center overflow-hidden">
+              <div
+                key={index}
+                className="text-sm text-muted-foreground animate-[slideUp_0.5s_ease]"
+              >
+                Search for{" "}
+                <span className="font-semibold text-foreground/80">
+                  {groceryNames[index]}
+                </span>
+                ...
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
