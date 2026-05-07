@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import lettuce from "@/assets/promo-lettuce.jpg";
 import strawberry from "@/assets/promo-strawberry.jpg";
+import shirt from "@/assets/m-shirt.jpg";
 
 const promos = [
   {
@@ -17,11 +18,18 @@ const promos = [
     img: strawberry,
     bg: "bg-[oklch(0.95_0.08_95)]",
   },
+  {
+    eyebrow: "Apparel Combo",
+    title: "2 Shirts + 2 Pants",
+    subtitle: "All under ₹1000. Limited time offer.",
+    img: shirt,
+    bg: "bg-[oklch(0.92_0.06_260)]",
+  },
 ];
 
 export function PromoBanners() {
   return (
-    <section className="max-w-7xl mx-auto px-4 mt-12 grid md:grid-cols-2 gap-5">
+    <section className="max-w-7xl mx-auto px-4 mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
       {promos.map((p, i) => (
         <motion.div
           key={p.title}
