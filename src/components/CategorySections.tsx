@@ -30,6 +30,16 @@ import amulCurdImg from "@/assets/dairy/amul-curd.jpg";
 import heritagePouchCurdImg from "@/assets/dairy/heritage-pouch-curd.jpg";
 import heritageTonedMilkImg from "@/assets/dairy/heritage-toned-milk.jpg";
 import corianderPowderImg from "@/assets/spices/coriander-powder.jpg";
+import kashmiriChilliImg from "@/assets/spices/kashmiri-chilli.jpg";
+import lalMirchImg from "@/assets/spices/lal-mirch.jpg";
+import hingImg from "@/assets/spices/hing.jpg";
+import turmericImg from "@/assets/spices/turmeric.jpg";
+import chilliPowderImg from "@/assets/spices/chilli-powder.jpg";
+import limcaImg from "@/assets/drinks/limca.jpg";
+import spritePackImg from "@/assets/drinks/sprite-pack.png";
+import thumsUp750Img from "@/assets/drinks/thums-up-750.jpg";
+import thumsUpImg from "@/assets/drinks/thums-up.jpg";
+import dietCokeImg from "@/assets/drinks/diet-coke.jpg";
 
 type Product = {
   name: string;
@@ -93,21 +103,21 @@ const sections: Section[] = [
     title: "Drinks",
     products: [
       { name: "Sprite Zero Lime Soft Drink", price: 38, oldPrice: 40, rating: 4.7, pack: "750 ml", tag: "Lime", query: "sprite bottle" },
-      { name: "Coca-Cola Diet Coke", price: 40, oldPrice: 45, rating: 4.7, pack: "300 ml", tag: "Diet", query: "diet coke can" },
-      { name: "Thums Up Cola Soft Drink", price: 20, oldPrice: 25, rating: 4.6, pack: "250 ml", tag: "Cola", query: "cola bottle" },
-      { name: "Thums Up Cola 750ml", price: 39, oldPrice: 40, rating: 4.7, pack: "750 ml", tag: "Cola", query: "thums up cola" },
-      { name: "Sprite Zero Pack of 4", price: 154, oldPrice: 160, rating: 4.6, pack: "4 x 300 ml", tag: "Combo", query: "sprite cans pack" },
-      { name: "Limca Lemon 'N' Lime", price: 39, oldPrice: 45, rating: 4.6, pack: "750 ml", tag: "Citrus", query: "lemon lime soda bottle" },
+      { name: "Coca-Cola Diet Coke", price: 40, oldPrice: 45, rating: 4.7, pack: "300 ml", tag: "Diet", query: "diet coke can", img: dietCokeImg },
+      { name: "Thums Up Cola Soft Drink", price: 20, oldPrice: 25, rating: 4.6, pack: "250 ml", tag: "Cola", query: "cola bottle", img: thumsUpImg },
+      { name: "Thums Up Cola 750ml", price: 39, oldPrice: 40, rating: 4.7, pack: "750 ml", tag: "Cola", query: "thums up cola", img: thumsUp750Img },
+      { name: "Sprite Zero Pack of 4", price: 154, oldPrice: 160, rating: 4.6, pack: "4 x 300 ml", tag: "Combo", query: "sprite cans pack", img: spritePackImg },
+      { name: "Limca Lemon 'N' Lime", price: 39, oldPrice: 45, rating: 4.6, pack: "750 ml", tag: "Citrus", query: "lemon lime soda bottle", img: limcaImg },
     ],
   },
   {
     title: "Spices & Seasonings",
     products: [
-      { name: "Aashirvaad Chilli Powder", price: 59, oldPrice: 65, rating: 4.7, pack: "100 g", tag: "Hot", query: "red chilli powder pack" },
-      { name: "Aashirvaad Turmeric Powder", price: 30, oldPrice: 40, rating: 4.6, pack: "100 g", tag: "Pure", query: "turmeric powder pack" },
-      { name: "L.G Compounded Hing Powder", price: 101, oldPrice: 102, rating: 4.7, pack: "50 g", tag: "Aromatic", query: "asafoetida hing" },
-      { name: "Aashirvaad Lal Mirch Powder", price: 209, oldPrice: 325, rating: 4.7, pack: "500 g", tag: "Hot", query: "lal mirch powder" },
-      { name: "Aashirvaad Kashmiri Chilli", price: 99, oldPrice: 140, rating: 4.6, pack: "100 g", tag: "Mild", query: "kashmiri chilli powder" },
+      { name: "Aashirvaad Chilli Powder", price: 59, oldPrice: 65, rating: 4.7, pack: "100 g", tag: "Hot", query: "red chilli powder pack", img: chilliPowderImg },
+      { name: "Aashirvaad Turmeric Powder", price: 30, oldPrice: 40, rating: 4.6, pack: "100 g", tag: "Pure", query: "turmeric powder pack", img: turmericImg },
+      { name: "L.G Compounded Hing Powder", price: 101, oldPrice: 102, rating: 4.7, pack: "50 g", tag: "Aromatic", query: "asafoetida hing", img: hingImg },
+      { name: "Aashirvaad Lal Mirch Powder", price: 209, oldPrice: 325, rating: 4.7, pack: "500 g", tag: "Hot", query: "lal mirch powder", img: lalMirchImg },
+      { name: "Aashirvaad Kashmiri Chilli", price: 99, oldPrice: 140, rating: 4.6, pack: "100 g", tag: "Mild", query: "kashmiri chilli powder", img: kashmiriChilliImg },
       { name: "Aashirvaad Coriander Powder", price: 32, oldPrice: 46, rating: 4.6, pack: "100 g", tag: "Fresh", query: "coriander powder pack", img: corianderPowderImg },
     ],
   },
