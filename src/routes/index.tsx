@@ -30,6 +30,7 @@ function Index() {
         <PromoBanners />
         <BigCategoryCards />
         <ProductGrid />
+        <CategorySections />
       </main>
       <Footer />
     </div>
