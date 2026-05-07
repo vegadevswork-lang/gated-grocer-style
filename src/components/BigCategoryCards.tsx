@@ -10,30 +10,35 @@ const cards = [
     tag: "Farm Fresh",
     image: vegetables,
     color: "from-green-500/30 to-emerald-700/40",
+    target: "cat-vegetables",
   },
   {
     name: "Fruits",
     tag: "Hand Picked",
     image: fruits,
     color: "from-orange-500/30 to-red-600/40",
+    target: "cat-fruits",
   },
   {
     name: "Home Essentials",
     tag: "Daily Needs",
     image: household,
     color: "from-blue-500/30 to-indigo-700/40",
+    target: "cat-spices-and-seasonings",
   },
   {
     name: "Clothes",
     tag: "New Arrivals",
     image: apparel,
     color: "from-pink-500/30 to-purple-700/40",
+    target: "cat-clothing",
   },
   {
     name: "Others",
     tag: "Snacks & More",
     image: snacks,
     color: "from-amber-500/30 to-yellow-700/40",
+    target: "cat-snacks",
   },
 ];
 
@@ -57,8 +62,14 @@ export function BigCategoryCards() {
           {loop.map((c, i) => (
             <a
               key={i}
-              href="#"
-              className="group relative shrink-0 w-[280px] md:w-[320px] h-[200px] rounded-2xl overflow-hidden border border-border shadow-elegant"
+              href={`#${c.target}`}
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById(c.target)
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="group relative shrink-0 w-[280px] md:w-[320px] h-[200px] rounded-2xl overflow-hidden border border-border shadow-elegant cursor-pointer"
             >
               <img
                 src={c.image}
