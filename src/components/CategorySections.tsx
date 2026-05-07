@@ -30,6 +30,16 @@ import amulCurdImg from "@/assets/dairy/amul-curd.jpg";
 import heritagePouchCurdImg from "@/assets/dairy/heritage-pouch-curd.jpg";
 import heritageTonedMilkImg from "@/assets/dairy/heritage-toned-milk.jpg";
 import corianderPowderImg from "@/assets/spices/coriander-powder.jpg";
+import kashmiriChilliImg from "@/assets/spices/kashmiri-chilli.jpg";
+import lalMirchImg from "@/assets/spices/lal-mirch.jpg";
+import hingImg from "@/assets/spices/hing.jpg";
+import turmericImg from "@/assets/spices/turmeric.jpg";
+import chilliPowderImg from "@/assets/spices/chilli-powder.jpg";
+import limcaImg from "@/assets/drinks/limca.jpg";
+import spritePackImg from "@/assets/drinks/sprite-pack.png";
+import thumsUp750Img from "@/assets/drinks/thums-up-750.jpg";
+import thumsUpImg from "@/assets/drinks/thums-up.jpg";
+import dietCokeImg from "@/assets/drinks/diet-coke.jpg";
 
 type Product = {
   name: string;
